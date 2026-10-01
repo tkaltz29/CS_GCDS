@@ -11,14 +11,7 @@
 #   etc). Everything is done with loops.
 #
 # Bugs:
-#   - If you only type one word, first name and last name both
-#     come back as that same word.
-#   - Typing two spaces in a row can make the name functions
-#     act weird because they think there is an empty name.
-#   - Titles like "Dr." get counted as the first name.
-#   - The scramble can sometimes give back the same order it
-#     started with (it's random).
-#   - Palindrome check does not ignore punctuation.
+#  -none
 #
 # Bonus:
 #   - #13 Built a menu so the user can pick which function to test
