@@ -22,6 +22,8 @@ Step 8: ask to play again if yes then reset the board if no then goodbye!
 # Tic-Tac-Toe
 # Tyler Kaltz | 10/8/26
 
+import random 
+
 def create_board():
     return [[" ", " ", " "],
             [" ", " ", " "],
@@ -37,7 +39,20 @@ def display_board(board):
 
 
 def get_player_move(board, player):
-    pass
+    while True:
+        try:
+            row = int(input("Player " + player + ", enter row (1-3): "))
+            col = int(input("Player " + player + ", enter column (1-3): "))
+        except ValueError:
+            print("Please enter numbers only.")
+            continue
+
+        if row < 1 or row > 3 or col < 1 or col > 3:
+            print("Row and column must be between 1 and 3.")
+        elif board[row - 1][col - 1] != " ":
+            print("That spot is already taken. Try again.")
+        else:
+            return row - 1, col - 1
 
 
 def check_winner(board):
@@ -71,8 +86,36 @@ def is_draw(board):
 
 def play_game():
     board = create_board()
-    display_board(board)
+    player = random.choice(["X", "O"])
+    print("Player " + player + " goes first!")
+
+    while True:
+        display_board(board)
+        row, col = get_player_move(board, player)
+        board[row][col] = player
+
+        winner = check_winner(board)
+        if winner != None:
+            display_board(board)
+            print("Player " + winner + " wins!")
+            break
+
+        if is_draw(board):
+            display_board(board)
+            print("It's a draw!")
+            break
+
+        if player == "X":
+            player = "O"
+        else:
+            player = "X"
+    
 
 
 if __name__ == "__main__":
-    play_game()
+    while True:
+        play_game()
+        again = input("Play again? (y/n): ").lower()
+        if again != "y":
+            print("Thanks for playing, goodbye!")
+            break
